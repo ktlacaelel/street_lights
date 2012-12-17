@@ -9,6 +9,7 @@ class StreetLights
     unless File.exists?(@street_lights_dir)
       FileUtils.mkdir_p(@street_lights_dir)
     end
+    at_exit { File.rm "#{@street_lights_dir}/#{Process.pid}" }
   end
 
   def call(env)
