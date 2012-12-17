@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/street_lights.rb",
+    "street_lights.gemspec",
     "test/helper.rb",
     "test/test_street_lights.rb"
   ]
