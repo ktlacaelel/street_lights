@@ -1,16 +1,48 @@
 = street_lights
 
-Description goes here.
+Watch your app as street lights.
 
-== Contributing to street_lights
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+Imagine a semaphore that shows each worker in a web app, busy in red, and available in green.
+
+== Philosophy
+
+The gem provides a class that follows the rack interface, so basically
+all you need to do is include the gem, and add the 'StreetLights'
+constant to your rack stack.
+
+The rack, would simple create files each would be named with the
+current worker's Process.id, in the file we would have the same pid
+wrapped in fancy ansi.
+
+unix-watch shell command is neat, the problem there is that most
+distros have old versions of watch that escape ansi. and we loose all
+the neat coloring feature.
+
+So Additionally I'll be bundling an executable called 'street_lights'
+that would do what 'watch' does but with ansi.
+
+While all these is true, the whole thing is meant for debugging and
+having a simple visual idea on how saturated an app could be.
+
+Specially when running heavy and or stressing processes at peak hours.
+
+Right now, it does some file writting which might not be the best and
+most performant way, but it would give you an idea of what is going
+on. I might change this to a unix-socket or something into the future.
+
+Should work, with anything, thing, web-brick, unicorn, synatra and all
+those.
+
+Sorry windows users!
+
+Hope you find it useful :)
+
+== Usage
+
+    require 'rubygems'
+    require 'street_lights'
+
+    my_rack_stack << StreetLights
 
 == Copyright
 
